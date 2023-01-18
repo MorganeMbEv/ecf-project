@@ -5,36 +5,29 @@ namespace App\Entity;
 use App\Repository\DishRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 #[ORM\Entity(repositoryClass: DishRepository::class)]
 class Dish
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(min: 2, max: 255)]
-    #[Assert\NotBlank()]
-    private string $title;
+    private ?string $title = null;
 
     #[ORM\Column(length: 500)]
-    #[Assert\Length(min: 2, max: 500)]
-    #[Assert\NotBlank()]
-    private string $description;
+    private ?string $description = null;
 
     #[ORM\Column]
-    #[Assert\Positive()]
-    #[Assert\LessThan(40)]
-    #[Assert\NotBlank()]
-    private float $price;
+    private ?float $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'dishes')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank()]
-    private Category $category;
+    private ?category $category = null;
+
+    #[ORM\Column(length: 50)]
+    private ?string $timeOfTheDay = null;
 
     public function getId(): ?int
     {
@@ -77,14 +70,26 @@ class Dish
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getCategory(): ?category
     {
         return $this->category;
     }
 
-    public function setCategory(?Category $category): self
+    public function setCategory(?category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getTimeOfTheDay(): ?string
+    {
+        return $this->timeOfTheDay;
+    }
+
+    public function setTimeOfTheDay(string $timeOfTheDay): self
+    {
+        $this->timeOfTheDay = $timeOfTheDay;
 
         return $this;
     }

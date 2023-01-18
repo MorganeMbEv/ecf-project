@@ -7,20 +7,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private int $id;
+    private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Assert\Length(min:2, max: 50)]
-    #[Assert\NotBlank()]
-    private string $name;
+    private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Dish::class)]
     private Collection $dishes;
@@ -38,6 +34,10 @@ class Category
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function __toString(){
+        return $this->name; // Remplacer champ par une propriété "string" de l'entité
     }
 
     public function setName(string $name): self

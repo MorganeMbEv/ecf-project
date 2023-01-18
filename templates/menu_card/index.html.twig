@@ -9,12 +9,28 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/apps/ecf_project/src/Controller/MenuCardController.php'|file_link(0) }}">src/Controller/MenuCardController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/apps/ecf_project/templates/menu_card/index.html.twig'|file_link(0) }}">templates/menu_card/index.html.twig</a></code></li>
-    </ul>
+    <h1> La carte</h1>
+        <div>
+            <h2>Menu du midi</h2>
+                {% for category in categories %}
+                    <h3>{{ category.name}}</h2>
+                    {% for dish in dishesLunch %}
+                        {% if dish.category == category.name %}
+                            <p>{{ dish.title }}</p>
+                        {% endif %}
+                    {% endfor %}      
+                {% endfor %} 
+        </div>
+        <div>
+            <h2>Menu du soir</h2>
+                {% for category in categories %}
+                    <h3>{{ category.name}}</h2>
+                    {% for dish in dishesDinner %}
+                        {% if dish.category == category.name %}
+                            <p>{{ dish.title }}</p>
+                        {% endif %}
+                    {% endfor %}      
+                {% endfor %}
+        </div>
 </div>
 {% endblock %}
