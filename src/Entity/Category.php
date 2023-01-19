@@ -18,7 +18,7 @@ class Category
     #[ORM\Column(length: 50)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'category', targetEntity: Dish::class)]
+    #[ORM\OneToMany(mappedBy: 'categoryDish', targetEntity: Dish::class)]
     private Collection $dishes;
 
     public function __construct()
@@ -59,7 +59,7 @@ class Category
     {
         if (!$this->dishes->contains($dish)) {
             $this->dishes->add($dish);
-            $dish->setCategory($this);
+            $dish->setCategoryDish($this);
         }
 
         return $this;
@@ -69,11 +69,12 @@ class Category
     {
         if ($this->dishes->removeElement($dish)) {
             // set the owning side to null (unless already changed)
-            if ($dish->getCategory() === $this) {
-                $dish->setCategory(null);
+            if ($dish->getCategoryDish() === $this) {
+                $dish->setCategoryDish(null);
             }
         }
 
         return $this;
     }
+
 }

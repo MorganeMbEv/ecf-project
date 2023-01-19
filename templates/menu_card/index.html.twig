@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MenuCardController!{% endblock %}
+{% block title %}Quai Antique - La carte{% endblock %}
 
 {% block body %}
 <style>
@@ -8,29 +8,32 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1> La carte</h1>
-        <div>
-            <h2>Menu du midi</h2>
+<div class="container-fluid">
+    <h1 class="text-center">La carte</h1>
+        <div class="row text-center">
+            <div class="col-md-6">
+                <h2>Menu du midi</h2>
                 {% for category in categories %}
                     <h3>{{ category.name}}</h2>
                     {% for dish in dishesLunch %}
-                        {% if dish.category == category.name %}
-                            <p>{{ dish.title }}</p>
+                        {% if dish.categoryDish == category.name %}
+                            <p>{{ dish.title }} - {{ dish.description}} / {{ dish.price }}€</p>
                         {% endif %}
                     {% endfor %}      
                 {% endfor %} 
+            </div>
+            <div class="col-md-6">
+                <h2>Menu du soir</h2>
+                    {% for category in categories %}
+                        <h3>{{ category.name}}</h2>
+                        {% for dish in dishesDinner %}
+                            {% if dish.categoryDish == category.name %}
+                                <p>{{ dish.title }} - {{ dish.description}} / {{ dish.price }}€</p>
+                            {% endif %}
+                        {% endfor %}      
+                    {% endfor %}
+            </div>
         </div>
-        <div>
-            <h2>Menu du soir</h2>
-                {% for category in categories %}
-                    <h3>{{ category.name}}</h2>
-                    {% for dish in dishesDinner %}
-                        {% if dish.category == category.name %}
-                            <p>{{ dish.title }}</p>
-                        {% endif %}
-                    {% endfor %}      
-                {% endfor %}
-        </div>
+        
 </div>
 {% endblock %}

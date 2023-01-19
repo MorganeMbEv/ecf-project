@@ -13,21 +13,21 @@ class Dish
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 500)]
+    #[ORM\Column(length: 255)]
     private ?string $description = null;
 
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'dishes')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?category $category = null;
-
     #[ORM\Column(length: 50)]
     private ?string $timeOfTheDay = null;
+
+    #[ORM\ManyToOne(inversedBy: 'dishes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $categoryDish = null;
 
     public function getId(): ?int
     {
@@ -70,18 +70,6 @@ class Dish
         return $this;
     }
 
-    public function getCategory(): ?category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
     public function getTimeOfTheDay(): ?string
     {
         return $this->timeOfTheDay;
@@ -90,6 +78,18 @@ class Dish
     public function setTimeOfTheDay(string $timeOfTheDay): self
     {
         $this->timeOfTheDay = $timeOfTheDay;
+
+        return $this;
+    }
+
+    public function getCategoryDish(): ?Category
+    {
+        return $this->categoryDish;
+    }
+
+    public function setCategoryDish(?Category $categoryDish): self
+    {
+        $this->categoryDish = $categoryDish;
 
         return $this;
     }
