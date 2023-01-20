@@ -4,12 +4,11 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -17,8 +16,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Email(
+        message: 'L\'adresse e-mail {{ value }} n\'est pas valide.',
+    )]
+    #[Assert\Type('string')]
     #[ORM\Column(length: 180, unique: true)]
-    private ?string $email = null;
+    protected ?string $email = null;
 
     #[ORM\Column]
     private array $roles = [];
@@ -28,6 +32,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+    
+    #[Assert\NotBlank]
+    #[Assert\Type('string')]
+    #[ORM\Column(length: 255)]
+    private ?string $lastname = null;
+
+    #[Assert\NotBlank]
+    #[ORM\Column]
+    private ?int $phoneNumber = null;
+    
+    #[Assert\NotBlank]
+    #[Assert\Type('integer')]
+    #[Assert\Positive]
+    #[Assert\GreaterThan(0)]
+    #[Assert\LessThanOrEqual(
+        value: 10,
+        message: 'Pour une réservation de plus de {{ compared_value }} personnes, veuillez nous appeler directement au 04 01 02 03 04.',
+    )]
+    #[ORM\Column]
+    private ?int $guestNumber = null;
+
 
     public function getId(): ?int
     {
@@ -97,5 +122,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): self
+    {
+        $this->lastname = $lastname;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?int
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?int $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function getGuestNumber(): ?int
+    {
+        return $this->guestNumber;
+    }
+
+    public function setGuestNumber(?int $guestNumber): self
+    {
+        $this->guestNumber = $guestNumber;
+
+        return $this;
     }
 }
