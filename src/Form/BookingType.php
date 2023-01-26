@@ -3,9 +3,19 @@
 namespace App\Form;
 
 use App\Entity\Booking;
+use App\Entity\OpeningHours;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookingType extends AbstractType
@@ -13,34 +23,36 @@ class BookingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('lastName')
-            ->add('date')
-            ->add('phoneNumber')
-            ->add('emailAdress')
-            ->add('guestNumber')
-            ->add('bookingTime', ChoiceType::class, [
-                'choices' => [
-                    '12h00' => '12:00',
-                    '12h15' => '12:15',
-                    '12h30' => '12:30',
-                    '12h45' => '12:45',
-                    '13h00' => '13:00',
-                    '13h15' => '13:15',
-                    '13h30' => '13:30',
-                    '19h00' => '19:00',
-                    '19h15' => '19:15',
-                    '19h30' => '19:30',
-                    '19h45' => '19:45',
-                    '20h00' => '20:00',
-                    '20h15' => '20:15',
-                    '20h30' => '20:30',
-                    '20h45' => '20:45',
-                    '21h00' => '21:00'
-
-                ],
-                'expanded' => true
+            ->add('lastName', TextType::class, [
+                'label' => 'Nom'
+            ])
+            ->add('date', DateType::class, [
+                'label' => 'Date',
+                'widget' => 'single_text'
+            ])
+            ->add('phoneNumber', TelType::class, [
+                'label' => 'Numéro de téléphone'
+            ])
+            ->add('emailAdress', EmailType::class, [
+                'label' => 'Adresse e-mail'
+            ])
+            ->add('guestNumber', NumberType::class, [
+                'label' => 'Nombre de couverts'
+            ])
+            ->addEventListener(
+                FormEvents::PRE_SUBMIT,
+                function (FormEvent $event) {
+                    $date = $event->getData();
+                    $form = $event->getForm();
+                    
+                }
+            )
+            ->add('hours', EntityType::class, [
+                'class' => OpeningHours::class,
+                'label' => 'Heures réservation',
             ])
         ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

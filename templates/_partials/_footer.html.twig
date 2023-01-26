@@ -1,3 +1,13 @@
 <footer class="container-fluid bg-secondary">
-	<a href="/admin" class="text-white-50">Plateforme administrative</a>
+	<div class="row">
+		<div class="col-3"></div>
+		<div class="col-3"><a href="/admin" class="text-white-50">Plateforme administrative</a></div>
+		<div class="col-3">
+		{{ render(controller(
+        'App\\Controller\\OpeningHoursController::displayHours'
+    	)) }}
+		</div>
+	</div>
+	
+	
 </footer>
