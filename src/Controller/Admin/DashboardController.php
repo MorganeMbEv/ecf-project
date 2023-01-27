@@ -3,8 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Dish;
-use App\Entity\MaxCustomers;
-use App\Entity\OpeningHours;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -49,7 +47,5 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToRoute('Homepage', 'fa fa-home', 'app_homepage');
         yield MenuItem::linkToCrud('Dish', 'fas fa-map-marker-alt', Dish::class);
-        yield MenuItem::linkToCrud('OpeningHours', 'fas fa-map-marker-alt', OpeningHours::class);
-        yield MenuItem::linkToCrud('MaxCustomers', 'fas fa-map-marker-alt', MaxCustomers::class);
     }
 }

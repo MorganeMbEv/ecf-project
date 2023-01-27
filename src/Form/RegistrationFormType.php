@@ -58,7 +58,7 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Numéro de téléphone'
             ])
             ->add('guestNumber', NumberType::class, [
-                'label' => 'Nombre de couverts par défault'
+                'label' => 'Nombre d\'invités par défault'
             ])
         ;
     }

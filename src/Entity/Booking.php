@@ -15,28 +15,18 @@ class Booking
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
-    #[Assert\NotBlank]
-    #[Assert\DateTime('Y-m-d')]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[Assert\NotBlank]
-    #[Assert\Length(exactly: 10)]
     #[ORM\Column]
     private ?int $phoneNumber = null;
 
-    #[Assert\NotBlank]
-    #[Assert\Email(message: 'L\'adresse e-mail {{ value }} n\'est pas valide.')]
     #[ORM\Column(length: 255)]
     private ?string $emailAdress = null;
 
-    #[Assert\GreaterThan(0, message : 'Réservation possible au minimum pour 1 couvert.')]
-    #[Assert\LessThanOrEqual(10, message : 'Réservation possible pour {{ compared_value }} couverts ou moins.')]
-    #[Assert\Positive]
     #[ORM\Column]
     private ?int $guestNumber = null;
 
