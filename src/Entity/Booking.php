@@ -20,12 +20,11 @@ class Booking
     private ?string $lastName = null;
 
     #[Assert\NotBlank]
-    #[Assert\DateTime('Y-m-d')]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
     #[Assert\NotBlank]
-    #[Assert\Length(exactly: 10)]
+    #[Assert\Regex('/^(?:0|\+33 ?|0?0?33 ?|)([1-9] ?(?:[0-9] ?){8})$/i')]
     #[ORM\Column]
     private ?int $phoneNumber = null;
 
@@ -39,10 +38,6 @@ class Booking
     #[Assert\Positive]
     #[ORM\Column]
     private ?int $guestNumber = null;
-
-    #[Assert\Time]
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $bookingTime = null;
 
     public function getId(): ?int
     {
@@ -71,6 +66,11 @@ class Booking
         $this->date = $date;
 
         return $this;
+    }
+
+    public function __toString(){
+
+        return $this->date;
     }
 
     public function getPhoneNumber(): ?int
@@ -105,18 +105,6 @@ class Booking
     public function setGuestNumber(int $guestNumber): self
     {
         $this->guestNumber = $guestNumber;
-
-        return $this;
-    }
-
-    public function getBookingTime(): ?\DateTimeInterface
-    {
-        return $this->bookingTime;
-    }
-
-    public function setBookingTime(\DateTimeInterface $bookingTime): self
-    {
-        $this->bookingTime = $bookingTime;
 
         return $this;
     }

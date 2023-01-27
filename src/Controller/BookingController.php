@@ -14,20 +14,25 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookingController extends AbstractController
 {
     #[Route('/reservation', name: 'app_booking')]
-    public function book(Request $request, PropertyAccess $propertyAccessor): Response
+    public function book(Request $request, EntityManagerInterface $entityManager): Response
     {
         $booking = new Booking();
         $form = $this->createForm(BookingType::class, $booking);
         $form->handleRequest($request);
 
 
-        //if ($form->isSubmitted() && $form->isValid()) {
-        //    
-        //}
-        var_dump($propertyAccessor->getValue($booking, '[hours]'));
+        if ($form->isSubmitted() && $form->isValid()) {
+            $booking = $form->getData();
+
+            $entityManager->persist($booking);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('booking_success');
+        }
+ 
 
         return $this->render('booking/index.html.twig', [
-            
+            'bookingForm' => $form->createView()
         ]);
     }
 }
