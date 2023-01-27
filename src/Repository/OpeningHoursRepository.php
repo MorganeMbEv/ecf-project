@@ -42,18 +42,16 @@ class OpeningHoursRepository extends ServiceEntityRepository
 //    /**
 //     * @return OpeningHours[] Returns an array of OpeningHours objects
 //     */
-//    public function findByExampleField($value): array
+//    public function displayBookingHours(): array
 //    {
 //        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
+//            ->andWhere('DATE_ADD(o.lunchOpening,15 , "MINUTE")')
 //            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
+//            ->setMaxResults(7)
 //            ->getQuery()
 //            ->getResult()
 //        ;
 //    }
-
 //    public function findOneBySomeField($value): ?OpeningHours
 //    {
 //        return $this->createQueryBuilder('o')

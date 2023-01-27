@@ -11,10 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class OpeningHoursController extends AbstractController
 {
     #[Route('/horaires-ouverture')]
-    public function displayHours(ManagerRegistry $doctrine): Response
+    public function displayHours(ManagerRegistry $doctrine ): Response
     {
         $repository = $doctrine->getRepository(OpeningHours::class);
         $openingHours = $repository->findAll();
+
+        
 
         return $this->render('_partials/_openingHours.html.twig', [
             'openingHours' => $openingHours
