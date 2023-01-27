@@ -2,4 +2,8 @@
 
 {% for openingHour in openingHours %}
     <p>{{ openingHour.day }} : {{ openingHour.lunchOpening |format_datetime('none', 'short', locale='fr') }} - {{ openingHour.lunchClosing |format_datetime('none', 'short', locale='fr') }} / {{ openingHour.dinnerOpening |format_datetime('none', 'short', locale='fr')}} - {{ openingHour.dinnerClosing |format_datetime('none', 'short', locale='fr')}} </p>
+<<<<<<< HEAD
 {% endfor %}
+=======
+{% endfor %}
+>>>>>>> 52acf636672c4add4bec17a55d465065e3cfe9e6

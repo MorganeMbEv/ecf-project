@@ -13,7 +13,7 @@ class Dish
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -22,12 +22,12 @@ class Dish
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $timeOfTheDay = null;
 
     #[ORM\ManyToOne(inversedBy: 'dishes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Category $categoryDish = null;
+    private ?Category $category = null;
 
     public function getId(): ?int
     {
@@ -82,14 +82,14 @@ class Dish
         return $this;
     }
 
-    public function getCategoryDish(): ?Category
+    public function getCategory(): ?Category
     {
-        return $this->categoryDish;
+        return $this->category;
     }
 
-    public function setCategoryDish(?Category $categoryDish): self
+    public function setCategory(?Category $category): self
     {
-        $this->categoryDish = $categoryDish;
+        $this->category = $category;
 
         return $this;
     }
