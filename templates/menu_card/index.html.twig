@@ -12,7 +12,7 @@
                 {% for category in categories %}
                     <h3>{{ category.name}}</h2>
                     {% for dish in dishesLunch %}
-                        {% if dish.categoryDish == category.name %}
+                        {% if dish.category == category.name %}
                             <p>{{ dish.title }} - {{ dish.description}} / {{ dish.price }}€</p>
                         {% endif %}
                     {% endfor %}      
@@ -23,13 +23,12 @@
                     {% for category in categories %}
                         <h3>{{ category.name}}</h2>
                         {% for dish in dishesDinner %}
-                            {% if dish.categoryDish == category.name %}
+                            {% if dish.category == category.name %}
                                 <p>{{ dish.title }} - {{ dish.description}} / {{ dish.price }}€</p>
                             {% endif %}
                         {% endfor %}      
                     {% endfor %}
             </div>
         </div>
-        
 </div>
 {% endblock %}
