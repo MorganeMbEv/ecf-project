@@ -10,8 +10,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		{# Feuilles de style #}
-		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}"> {% block stylesheets %}{% endblock %}
-		<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}"> 
+		{% block stylesheets %}
+			<link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+		{% endblock %}
 
 		{# Fichiers JS #}
 		<script scr="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>

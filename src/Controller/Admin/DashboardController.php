@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Dish;
 use App\Entity\MaxCustomers;
 use App\Entity\OpeningHours;
+use App\Entity\Picture;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -47,9 +48,10 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToRoute('Homepage', 'fa fa-home', 'app_homepage');
-        yield MenuItem::linkToCrud('Dish', 'fas fa-map-marker-alt', Dish::class);
-        yield MenuItem::linkToCrud('OpeningHours', 'fas fa-map-marker-alt', OpeningHours::class);
-        yield MenuItem::linkToCrud('MaxCustomers', 'fas fa-map-marker-alt', MaxCustomers::class);
+        yield MenuItem::linkToRoute('Page d\'accueil', 'fa fa-home', 'app_homepage');
+        yield MenuItem::linkToCrud('Plats', 'fas fa-map-marker-alt', Dish::class);
+        yield MenuItem::linkToCrud('Horaires d\'ouverture', 'fas fa-map-marker-alt', OpeningHours::class);
+        yield MenuItem::linkToCrud('Maximum clients', 'fas fa-map-marker-alt', MaxCustomers::class);
+        yield MenuItem::linkToCrud('Galerie d\'image', 'fas fa-map-marker-alt', Picture::class);
     }
 }

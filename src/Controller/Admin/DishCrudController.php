@@ -25,7 +25,7 @@ class DishCrudController extends AbstractCrudController
             MoneyField::new('price')
                 ->setCurrency('EUR'),
             TextField::new('timeOfTheDay'),
-            AssociationField::new('categoryDish')
+            AssociationField::new('category')
                 ->setFormTypeOptionIfNotSet('by_reference', true)
         ];
     }
