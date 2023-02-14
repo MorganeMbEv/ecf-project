@@ -1,13 +1,23 @@
-<footer class="container-fluid bg-secondary">
-	<div class="row">
-		<div class="col-3"></div>
-		<div class="col-3"><a href="/admin" class="text-white-50">Plateforme administrative</a></div>
-		<div class="col-3">
-		{{ render(controller(
-        'App\\Controller\\OpeningHoursController::displayHours'
-    	)) }}
+<footer>
+	<nav class="navbar navbar-expand-lg justify-content-center" style="background-color: #597167;">
+		<div class="row  align-items-center text-center p-3">
+			<div class="col">
+				Quai Antique <br>
+				123 rue des soleils 73000 Chambery <br>
+				04 01 02 03 04 <br>
+				quai-antique@example.com <br>
+			</div>
+			{% if is_granted('ROLE_ADMIN') %}
+				<div class="col"><a href="/admin" class="text-white-50">Plateforme administrative</a></div>
+			{% endif %}
+			<div class="col">
+				{% include "_partials/_nav.html.twig" %}
+			</div>
+			<div class="col">
+			{{ render(controller(
+    	    'App\\Controller\\OpeningHoursController::displayHours'
+    		)) }}
+			</div>
 		</div>
-	</div>
-	
-	
+	</nav>
 </footer>

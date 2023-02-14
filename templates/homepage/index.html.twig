@@ -3,13 +3,14 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-
+<div class="banner">
+    <img src="{{ asset('assets/images/restaurant.jpg') }}" class="banner-img img-fluid" alt="restaurant">
+</div>
 <div class="container-fluid mb-3">
-    <h1>Accueil</h1>
     <div class="row justify-content-center">
         {% for picture in pictures %}
             <div class="col-md-3 d-flex">
-                <img src="{{ vich_uploader_asset(picture, 'imageFile') }}" title="{{picture.title}}" alt="{{picture.title}}" class="img-fluid">
+                <img src="{{ vich_uploader_asset(picture, 'imageFile') }}" title="{{picture.title}}" alt="{{picture.title}}" class="img-fluid m-2">
             </div>
         {% endfor %}
         </div>

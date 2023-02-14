@@ -39,6 +39,10 @@ class Booking
     #[ORM\Column]
     private ?int $guestNumber = null;
 
+    #[Assert\NotBlank]
+    #[ORM\Column]
+    private ?string $time = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +109,18 @@ class Booking
     public function setGuestNumber(int $guestNumber): self
     {
         $this->guestNumber = $guestNumber;
+
+        return $this;
+    }
+
+    public function getTime(): ?string
+    {
+        return $this->time;
+    }
+
+    public function setTime(string $time): self
+    {
+        $this->time = $time;
 
         return $this;
     }

@@ -32,6 +32,9 @@ class OpeningHours
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $dinnerClosing = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $maxCustomers = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +111,18 @@ class OpeningHours
     public function setDinnerClosing(\DateTimeInterface $dinnerClosing): self
     {
         $this->dinnerClosing = $dinnerClosing;
+
+        return $this;
+    }
+
+    public function getMaxCustomers(): ?int
+    {
+        return $this->maxCustomers;
+    }
+
+    public function setMaxCustomers(?int $maxCustomers): self
+    {
+        $this->maxCustomers = $maxCustomers;
 
         return $this;
     }

@@ -51,7 +51,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToRoute('Page d\'accueil', 'fa fa-home', 'app_homepage');
         yield MenuItem::linkToCrud('Plats', 'fas fa-map-marker-alt', Dish::class);
         yield MenuItem::linkToCrud('Horaires d\'ouverture', 'fas fa-map-marker-alt', OpeningHours::class);
-        yield MenuItem::linkToCrud('Maximum clients', 'fas fa-map-marker-alt', MaxCustomers::class);
         yield MenuItem::linkToCrud('Galerie d\'image', 'fas fa-map-marker-alt', Picture::class);
     }
 }

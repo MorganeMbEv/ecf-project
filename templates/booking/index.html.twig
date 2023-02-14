@@ -6,17 +6,17 @@
     <div class="container-fluid mb-3">
         <h1 class="text-center">Réservation</h1>
             <div class="row justify-content-center">
-                {{form_start(bookingForm) }}
-                    <div class="col-6">
-                        {{ form_row(bookingForm.lastName) }}
-                        {{ form_row(bookingForm.emailAdress) }}
-                        {{ form_row(bookingForm.phoneNumber) }}
-                        {{ form_row(bookingForm.guestNumber) }}
-                        {{ form_row(bookingForm.date) }}
-                        
-                    </div>
-                    <button type="submit" class="btn btn-primary">Je réserve une table</button>
-                {{form_end(bookingForm) }}
+                <div class="col-6">
+                    {{form_start(bookingForm) }}
+                            {{ form_row(bookingForm.lastName) }}
+                            {{ form_row(bookingForm.emailAdress) }}
+                            {{ form_row(bookingForm.phoneNumber) }}
+                            {{ form_row(bookingForm.guestNumber) }}
+                            {{ form_row(bookingForm.date) }}
+                            {{ form_row(bookingForm.timeOfTheDay) }}
+                            <button type="submit" class="btn btn-primary">Je réserve une table</button>
+                    {{form_end(bookingForm) }}
+                </div>
             </div>
     </div>
     

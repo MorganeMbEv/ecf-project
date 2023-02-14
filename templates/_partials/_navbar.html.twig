@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg p-0" style="background-color: #F2EFE1;">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/"><img src="{{ asset('assets/images/logo_transparent1.png') }}" title="Logo Quai Antique" class="logo img-fluid " alt=""></a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			{% include "_partials/_nav.html.twig" %}
+			
+			{% if app.user %}
+					<div class="text-center">
+						Bienvenue {{ app.user.lastname }} <br>
+						<a href="{{ path('app_logout') }}" class="btn btn-success" title="Se déconnecter"><small>Déconnexion</small></a>
+					</div>
+			{% else %}
+				<a href="/login" class="btn btn-primary btn active" role="button" aria-pressed="true">Me connecter</a>
+			{% endif %}
+		</div>
+	</div>
+</nav>
