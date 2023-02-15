@@ -40,8 +40,8 @@ class Booking
     private ?int $guestNumber = null;
 
     #[Assert\NotBlank]
-    #[ORM\Column]
-    private ?string $time = null;
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $time = null;
 
     public function getId(): ?int
     {
@@ -113,16 +113,20 @@ class Booking
         return $this;
     }
 
-    public function getTime(): ?string
+    public function getTime(): ?\DateTimeInterface
     {
         return $this->time;
     }
 
-    public function setTime(string $time): self
+    public function setTime(\DateTimeInterface $time): self
     {
         $this->time = $time;
 
         return $this;
     }
 
+//    public function getTimeFormat($format = 'H:i')
+//    {
+//        return $this->time->format($format);
+//    }
 }

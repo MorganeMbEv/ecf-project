@@ -91,6 +91,11 @@ class OpeningHours
         return $this;
     }
 
+//    public function getLunchOpeningFormat($format = 'H:i')
+//    {
+//        return $this->lunchOpening->format($format);
+//    }
+
     public function getDinnerOpening(): ?\DateTimeInterface
     {
         return $this->dinnerOpening;

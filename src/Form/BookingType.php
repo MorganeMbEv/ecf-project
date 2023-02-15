@@ -3,26 +3,26 @@
 namespace App\Form;
 
 use App\Entity\Booking;
-use App\Entity\TimeOfTheDay;
+use App\Entity\OpeningHours;
+use DateTime;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\Test\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookingType extends AbstractType
 {
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+
         $builder
             ->add('lastName', TextType::class, [
                 'label' => 'Nom'
@@ -52,15 +52,28 @@ class BookingType extends AbstractType
                     '10' => 10,
                 ],
             ])
-            ->add('timeOfTheDay', EntityType::class, [
-                'class'=> TimeOfTheDay::class,
+            ->add('time', EntityType::class, [
+                'class' => OpeningHours::class,
                 'label' => 'Heure de la réservation',
-                'choice_label' => 'name',
-                'mapped' => false,
-                'expanded' => true
+                'choice_label' => 'lunchOpening',
+                'placeholder' => 'Choisissez une heure',
             ])
         ;
+        $builder->get('time')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($timeToString) {
+                    // transform the DateTime to a string
+                    return date_format(new DateTime($timeToString),'H:i');
+                },
+                function ($timeToDateTime) {
+                    // transform the string back to a DateTime
+                    $time = strtotime($timeToDateTime);
+                    return date('H:i:s', $time);
+                }
+            ))
+        ;
     }
+    
 
     public function configureOptions(OptionsResolver $resolver): void
     {
