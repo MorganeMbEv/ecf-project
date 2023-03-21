@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Booking;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\DateTimeType;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,20 +42,25 @@ class BookingRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Booking[] Returns an array of Booking objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Booking[] Returns an array of Booking objects
+     */
+    public function findNumberOfCustomers(DateTimeImmutable $date, DateTimeImmutable $shift)
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query =  $entityManager->createQuery(
+            'SELECT b.date, b.shift, SUM(b.guestNumber)
+            FROM App\Entity\Booking b
+            WHERE b.date = :date AND b.shift = :shift')
+            ->setParameters([
+                'date' => $date,
+                'time' => $shift
+            ])
+        ;
+        return $query->getResult();
+
+    }
 
 //    public function findOneBySomeField($value): ?Booking
 //    {

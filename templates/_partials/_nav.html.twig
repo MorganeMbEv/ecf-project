@@ -10,4 +10,9 @@
 	<li class="nav-item">
 		<a {% if route_name == "app_booking" %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{{ path('app_booking') }}">Réservation</a>
 	</li>
+	{% if is_granted('ROLE_ADMIN') %}
+	<li class="nav-item">
+		<a href="/admin" class="nav-link">Plateforme administrative</a>
+	</li>
+	{% endif %}
 </ul>

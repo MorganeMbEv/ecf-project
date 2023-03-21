@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Booking;
-use App\Entity\OpeningHours;
+use App\Entity\Table;
 use App\Form\BookingType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -18,12 +18,25 @@ class BookingController extends AbstractController
     #[Route('/reservation', name: 'app_booking')]
     public function book(Request $request, EntityManagerInterface $entityManager, ManagerRegistry $doctrine): Response
     {
-        $booking = new Booking();
-        $form = $this->createForm(BookingType::class, $booking);
+        $newBooking = new Booking();
+        $form = $this->createForm(BookingType::class, $newBooking);
         $form->handleRequest($request);
+
+        $repository = $doctrine->getRepository(Table::class);
+        $table = $repository->findAll();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $booking = $form->getData();
+            $date = $booking->getDate();
+
+            if ($booking->getTime() < '15:00:00') {
+                echo $booking->setShift(1);
+            } else {
+                echo $booking->setShift(2);
+            };
+
+            $shift = $booking->getShift();
+            $numberOfCustomers = $entityManager->getRepository(Booking::class)->findNumberOfCustomers($date, $shift);
 
             $entityManager->persist($booking);
             $entityManager->flush();
@@ -31,12 +44,9 @@ class BookingController extends AbstractController
             return $this->redirectToRoute('booking_success');
         }
 
-        $repository = $doctrine->getRepository(OpeningHours::class);
-        $openingHours = $repository->findAll();
-
         return $this->render('booking/index.html.twig', [
             'bookingForm' => $form->createView(),
-            'openingHours' => $openingHours
+            
         ]);
     }
 }

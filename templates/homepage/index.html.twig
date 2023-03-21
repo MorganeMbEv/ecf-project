@@ -3,17 +3,34 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
+
 <div class="banner">
-    <img src="{{ asset('assets/images/restaurant.jpg') }}" class="banner-img img-fluid" alt="restaurant">
+    <div class="banner-header">
+        <img src="{{ asset('assets/images/restaurant.jpg') }}" class="banner-img img-fluid" alt="restaurant">
+        <div class="banner-logo">
+            <img src="{{ asset('assets/images/logo_transparent1.png') }}" class="logo-banner img-fluid" alt="logo">
+        </div>
+    </div>  
 </div>
-<div class="container-fluid mb-3">
+<div class="container-fluid mt-4 mb-4">
     <div class="row justify-content-center">
         {% for picture in pictures %}
             <div class="col-md-3 d-flex">
                 <img src="{{ vich_uploader_asset(picture, 'imageFile') }}" title="{{picture.title}}" alt="{{picture.title}}" class="img-fluid m-2">
             </div>
         {% endfor %}
-        </div>
+    </div>
+    <div class="text-center mt-4 mb-2">
+        <a href="{{ path('app_booking') }}" class="btn btn-success">RESERVER UNE TABLE</a>
     </div>
 </div>
+<div class="bg-green mb-4">
+    <div class="container-fluid">
+        <h3>A table avec le chef Arnaud Michant</h3>
+        <p class="mt-4 mb-4">
+        Le Chef Arnaud Michant aime passionnément les produits - et producteurs - de la Savoie. C’est pour cela qu’il est fier de vous faire partager une expérience gastronomique, à travers une cuisine sans artifice. Arnaud Michant voit l’ouverture son nouveau restaurant comme une promesse d’un voyage dans son univers culinaire.
+        </p>
+    </div>
+</div>
+
 {% endblock %}

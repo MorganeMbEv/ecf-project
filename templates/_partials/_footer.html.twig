@@ -1,23 +1,22 @@
-<footer>
-	<nav class="navbar navbar-expand-lg justify-content-center" style="background-color: #597167;">
-		<div class="row  align-items-center text-center p-3">
-			<div class="col">
-				Quai Antique <br>
-				123 rue des soleils 73000 Chambery <br>
-				04 01 02 03 04 <br>
-				quai-antique@example.com <br>
-			</div>
-			{% if is_granted('ROLE_ADMIN') %}
-				<div class="col"><a href="/admin" class="text-white-50">Plateforme administrative</a></div>
-			{% endif %}
-			<div class="col">
-				{% include "_partials/_nav.html.twig" %}
-			</div>
-			<div class="col">
-			{{ render(controller(
-    	    'App\\Controller\\OpeningHoursController::displayHours'
-    		)) }}
-			</div>
-		</div>
-	</nav>
-</footer>
+<div class="footer row g-0 align-items-center text-center justify-content-between" style="background-color: #597167; color: #F2EFE1">
+	<div class="col">
+		Quai Antique <br>
+		<p></p>
+		123 rue des soleils <br>
+		73000 Chambery <br>
+		<p></p>
+		04 01 02 03 04 <br>
+		quai-antique@example.com <br>
+	</div>
+	<div class="col">
+		{% include "_partials/_nav.html.twig" %}
+	</div>
+	<div class="col">
+	{{ render(controller(
+	'App\\Controller\\OpeningHoursController::displayHours'
+	)) }}
+	</div>
+	<div class="row text-center">
+		<a href="{{ path('app_legal_notice') }}" class="font-green">Mentions légales</a>
+	</div>
+</div>

@@ -3,22 +3,58 @@
 {% block title %}Réserver une table{% endblock %}
 
 {% block body %}
-    <div class="container-fluid mb-3">
-        <h1 class="text-center">Réservation</h1>
-            <div class="row justify-content-center">
-                <div class="col-6">
+    <div class="container-fluid">     
+        <div class="row justify-content-center">
+                <div class="form bg-green col-4 m-5 p-3">
                     {{form_start(bookingForm) }}
-                            {{ form_row(bookingForm.lastName) }}
-                            {{ form_row(bookingForm.emailAdress) }}
-                            {{ form_row(bookingForm.phoneNumber) }}
-                            {{ form_row(bookingForm.guestNumber) }}
-                            {{ form_row(bookingForm.date) }}
-                            
-                            <button type="submit" class="btn btn-primary">Je réserve une table</button>
+                    <h1 class="h3 text-center">Réservation</h1>
+                    {% if app.user %}
+                        {{ form_label(bookingForm.lastName, 'Nom') }}
+                        {{ form_widget(bookingForm.lastName, {value : app.user.lastName}) }}
+
+                        {{ form_label(bookingForm.emailAdress, 'Email') }}
+                        {{ form_widget(bookingForm.emailAdress, {value : app.user.email}) }}
+
+                        {{ form_label(bookingForm.phoneNumber, 'Numéro de téléphone') }}
+                        {{ form_widget(bookingForm.phoneNumber, {value : app.user.phoneNumber}) }}
+
+                        {{ form_label(bookingForm.guestNumber, 'Nombre de convives') }}
+                        {{ form_widget(bookingForm.guestNumber, {value : app.user.guestNumber}) }}
+
+                        {{ form_label(bookingForm.allergies, 'Allergies') }}
+                        {{ form_widget(bookingForm.allergies, {value : app.user.allergies}) }}
+
+                        {{ form_row(bookingForm.date) }}
+                        {{ form_row(bookingForm.time) }}
+                    {% else %}
+                        {{ form_row(bookingForm.lastName) }}
+                        {{ form_row(bookingForm.emailAdress) }}
+                        {{ form_row(bookingForm.phoneNumber) }}
+                        {{ form_row(bookingForm.guestNumber) }}
+                        {{ form_row(bookingForm.allergies) }}
+                        {{ form_row(bookingForm.date) }}
+                        {{ form_row(bookingForm.time) }}
+                    {% endif %}
+                        <span class="text-center">
+                            </span><button type="submit" class="btn btn-success">Je réserve une table</button>
+                        </span>
                     {{form_end(bookingForm) }}
                 </div>
-            </div>
+        </div>
     </div>
     
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
+
+        let time = document.getElementById('booking_time_hour');
+        function displayAvailability() {
+            alert('Quelle heure est-il?')
+        }
+        
+        time.addEventListener('change', displayAvailability);
+    </script>
 {% endblock %}

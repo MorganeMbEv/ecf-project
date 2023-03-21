@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\BookingRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -20,7 +22,7 @@ class Booking
     private ?string $lastName = null;
 
     #[Assert\NotBlank]
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
     #[Assert\NotBlank]
@@ -40,9 +42,22 @@ class Booking
     private ?int $guestNumber = null;
 
     #[Assert\NotBlank]
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $time = null;
 
+    #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'bookings')]
+    private Collection $allergies;
+
+    #[ORM\Column]
+    private ?int $shift = null;
+
+    public function __construct()
+    {
+        $this->allergies = new ArrayCollection();
+        $this->date = new \DateTime();
+    }
+
+    
     public function getId(): ?int
     {
         return $this->id;
@@ -72,10 +87,10 @@ class Booking
         return $this;
     }
 
-    public function __toString(){
-
-        return $this->date;
-    }
+    //public function __toString(){
+//
+    //    return $this->date;
+    //}
 
     public function getPhoneNumber(): ?int
     {
@@ -129,4 +144,45 @@ class Booking
 //    {
 //        return $this->time->format($format);
 //    }
+
+    /**
+     * @return Collection<int, Allergy>
+     */
+    public function getAllergies(): Collection
+    {
+        return $this->allergies;
+    }
+    
+    public function addAllergy(Allergy $allergy): self
+    {
+        if (!$this->allergies->contains($allergy)) {
+            $this->allergies->add($allergy);
+        }
+    
+        return $this;
+    }
+    
+    public function removeAllergy(Allergy $allergy): self
+    {
+        $this->allergies->removeElement($allergy);
+    
+        return $this;
+    }
+    
+    public function getShift(): ?int
+    {
+        return $this->shift;
+    }
+    
+    public function setShift(int $shift): self
+    {
+        $this->shift = $shift;
+        
+        return $this;
+    }
+
+    public function __toString(){
+
+        return $this->shift;
+    }
 }

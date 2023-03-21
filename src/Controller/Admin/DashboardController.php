@@ -6,6 +6,7 @@ use App\Entity\Dish;
 use App\Entity\MaxCustomers;
 use App\Entity\OpeningHours;
 use App\Entity\Picture;
+use App\Entity\Table;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -52,5 +53,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Plats', 'fas fa-map-marker-alt', Dish::class);
         yield MenuItem::linkToCrud('Horaires d\'ouverture', 'fas fa-map-marker-alt', OpeningHours::class);
         yield MenuItem::linkToCrud('Galerie d\'image', 'fas fa-map-marker-alt', Picture::class);
+        yield MenuItem::linkToCrud('Tables', 'fas fa-map-marker-alt', Table::class);
     }
 }

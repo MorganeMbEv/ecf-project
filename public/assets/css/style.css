@@ -1,10 +1,39 @@
+.nav-item :hover {
+     text-decoration: underline;
+}
+
 .logo {
     height: 6rem;
 }
 
+.banner {
+    position: relative;
+}
 .banner-img {
+    position: relative;
     height: 225px;
     width: 100%;
     object-fit: cover;
     opacity: 0.5;
+    z-index: 1;
+}
+
+.logo-banner {
+    position: absolute;
+    z-index: 2;
+    transform: translate(100%);
+    top: 50%; left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+}
+
+.bg-green {
+    background-color: rgba(71, 139, 129, 0.25);
+}
+
+.font-green {
+    color: rgba(71, 139, 129, 0.25);
+}
+
+.form {
+    border-radius: 1em;
 }
